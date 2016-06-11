@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Clients" EntityType="Model.Store.Clients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Waters" EntityType="Model.Store.Waters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PayMethods" EntityType="Model.Store.PayMethods" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InstructorPositions" EntityType="Model.Store.InstructorPositions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Instructors" EntityType="Model.Store.Instructors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InstructionTypes" EntityType="Model.Store.InstructionTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WatercraftTypes" EntityType="Model.Store.WatercraftTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WatercraftConditions" EntityType="Model.Store.WatercraftConditions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WaterCrafts" EntityType="Model.Store.WaterCrafts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RentJournalSet" EntityType="Model.Store.RentJournalSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="InstructorInstructorPosition" Association="Model.Store.InstructorInstructorPosition">
+      <End Role="Instructor" EntitySet="Instructors" />
+      <End Role="InstructorPosition" EntitySet="InstructorPositions" />
+    </AssociationSet>
+    <AssociationSet Name="WaterCraftWatercraftType" Association="Model.Store.WaterCraftWatercraftType">
+      <End Role="WaterCraft" EntitySet="WaterCrafts" />
+      <End Role="WatercraftType" EntitySet="WatercraftTypes" />
+    </AssociationSet>
+    <AssociationSet Name="WaterCraftWatercraftCondition" Association="Model.Store.WaterCraftWatercraftCondition">
+      <End Role="WaterCraft" EntitySet="WaterCrafts" />
+      <End Role="WatercraftCondition" EntitySet="WatercraftConditions" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalClient" Association="Model.Store.RentJournalClient">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalWater" Association="Model.Store.RentJournalWater">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="Water" EntitySet="Waters" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalPayMethod" Association="Model.Store.RentJournalPayMethod">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="PayMethod" EntitySet="PayMethods" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalWaterCraft" Association="Model.Store.RentJournalWaterCraft">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="WaterCraft" EntitySet="WaterCrafts" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalInstructionType" Association="Model.Store.RentJournalInstructionType">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="InstructionType" EntitySet="InstructionTypes" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalInstructor" Association="Model.Store.RentJournalInstructor">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="Instructor" EntitySet="Instructors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="Passport" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Waters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="PayMethods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="InstructorPositions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Instructors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="InstructorPositionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InstructionTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="WatercraftTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="varchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="WatercraftConditions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Condition" Type="varchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="WaterCrafts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="WatercraftTypeId" Type="int" Nullable="false" />
+    <Property Name="WatercraftConditionId" Type="int" Nullable="false" />
+    <Property Name="CostRate" Type="decimal" Nullable="false" Precision="9" Scale="2" />
+  </EntityType>
+  <EntityType Name="RentJournalSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="WaterId" Type="int" Nullable="false" />
+    <Property Name="PayMethodId" Type="int" Nullable="false" />
+    <Property Name="WaterCraftId" Type="int" Nullable="false" />
+    <Property Name="InstructionTypeId" Type="int" Nullable="false" />
+    <Property Name="InstructorId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Cost" Type="decimal" Nullable="false" Precision="9" Scale="2" />
+  </EntityType>
+  <Association Name="InstructorInstructorPosition">
+    <End Role="Instructor" Type="Model.Store.Instructors" Multiplicity="*" />
+    <End Role="InstructorPosition" Type="Model.Store.InstructorPositions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="InstructorPosition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Instructor">
+        <PropertyRef Name="InstructorPositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WaterCraftWatercraftType">
+    <End Role="WaterCraft" Type="Model.Store.WaterCrafts" Multiplicity="*" />
+    <End Role="WatercraftType" Type="Model.Store.WatercraftTypes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WatercraftType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WaterCraft">
+        <PropertyRef Name="WatercraftTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WaterCraftWatercraftCondition">
+    <End Role="WaterCraft" Type="Model.Store.WaterCrafts" Multiplicity="*" />
+    <End Role="WatercraftCondition" Type="Model.Store.WatercraftConditions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WatercraftCondition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WaterCraft">
+        <PropertyRef Name="WatercraftConditionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalClient">
+    <End Role="RentJournal" Type="Model.Store.RentJournalSet" Multiplicity="*" />
+    <End Role="Client" Type="Model.Store.Clients" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalWater">
+    <End Role="RentJournal" Type="Model.Store.RentJournalSet" Multiplicity="*" />
+    <End Role="Water" Type="Model.Store.Waters" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Water">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="WaterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalPayMethod">
+    <End Role="RentJournal" Type="Model.Store.RentJournalSet" Multiplicity="*" />
+    <End Role="PayMethod" Type="Model.Store.PayMethods" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PayMethod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="PayMethodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalWaterCraft">
+    <End Role="RentJournal" Type="Model.Store.RentJournalSet" Multiplicity="*" />
+    <End Role="WaterCraft" Type="Model.Store.WaterCrafts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WaterCraft">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="WaterCraftId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalInstructionType">
+    <End Role="RentJournal" Type="Model.Store.RentJournalSet" Multiplicity="*" />
+    <End Role="InstructionType" Type="Model.Store.InstructionTypes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="InstructionType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="InstructionTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalInstructor">
+    <End Role="RentJournal" Type="Model.Store.RentJournalSet" Multiplicity="*" />
+    <End Role="Instructor" Type="Model.Store.Instructors" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Instructor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="InstructorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

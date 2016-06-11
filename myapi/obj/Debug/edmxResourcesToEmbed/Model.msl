@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Client)">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Waters">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Water)">
+        <MappingFragment StoreEntitySet="Waters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayMethods">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PayMethod)">
+        <MappingFragment StoreEntitySet="PayMethods">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InstructorPositions">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InstructorPosition)">
+        <MappingFragment StoreEntitySet="InstructorPositions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instructors">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Instructor)">
+        <MappingFragment StoreEntitySet="Instructors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="InstructorPositionId" ColumnName="InstructorPositionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InstructionTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InstructionType)">
+        <MappingFragment StoreEntitySet="InstructionTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WatercraftTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WatercraftType)">
+        <MappingFragment StoreEntitySet="WatercraftTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WatercraftConditions">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WatercraftCondition)">
+        <MappingFragment StoreEntitySet="WatercraftConditions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Condition" ColumnName="Condition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WaterCrafts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WaterCraft)">
+        <MappingFragment StoreEntitySet="WaterCrafts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="WatercraftTypeId" ColumnName="WatercraftTypeId" />
+          <ScalarProperty Name="WatercraftConditionId" ColumnName="WatercraftConditionId" />
+          <ScalarProperty Name="CostRate" ColumnName="CostRate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RentJournalSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RentJournal)">
+        <MappingFragment StoreEntitySet="RentJournalSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="WaterId" ColumnName="WaterId" />
+          <ScalarProperty Name="PayMethodId" ColumnName="PayMethodId" />
+          <ScalarProperty Name="WaterCraftId" ColumnName="WaterCraftId" />
+          <ScalarProperty Name="InstructionTypeId" ColumnName="InstructionTypeId" />
+          <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

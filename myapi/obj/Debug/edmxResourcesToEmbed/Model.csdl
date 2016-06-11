@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clients" EntityType="Model.Client" />
+    <EntitySet Name="Waters" EntityType="Model.Water" />
+    <EntitySet Name="PayMethods" EntityType="Model.PayMethod" />
+    <EntitySet Name="InstructorPositions" EntityType="Model.InstructorPosition" />
+    <EntitySet Name="Instructors" EntityType="Model.Instructor" />
+    <AssociationSet Name="InstructorInstructorPosition" Association="Model.InstructorInstructorPosition">
+      <End Role="Instructor" EntitySet="Instructors" />
+      <End Role="InstructorPosition" EntitySet="InstructorPositions" />
+    </AssociationSet>
+    <EntitySet Name="InstructionTypes" EntityType="Model.InstructionType" />
+    <EntitySet Name="WatercraftTypes" EntityType="Model.WatercraftType" />
+    <EntitySet Name="WatercraftConditions" EntityType="Model.WatercraftCondition" />
+    <EntitySet Name="WaterCrafts" EntityType="Model.WaterCraft" />
+    <AssociationSet Name="WaterCraftWatercraftType" Association="Model.WaterCraftWatercraftType">
+      <End Role="WaterCraft" EntitySet="WaterCrafts" />
+      <End Role="WatercraftType" EntitySet="WatercraftTypes" />
+    </AssociationSet>
+    <AssociationSet Name="WaterCraftWatercraftCondition" Association="Model.WaterCraftWatercraftCondition">
+      <End Role="WaterCraft" EntitySet="WaterCrafts" />
+      <End Role="WatercraftCondition" EntitySet="WatercraftConditions" />
+    </AssociationSet>
+    <EntitySet Name="RentJournalSet" EntityType="Model.RentJournal" />
+    <AssociationSet Name="RentJournalClient" Association="Model.RentJournalClient">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalWater" Association="Model.RentJournalWater">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="Water" EntitySet="Waters" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalPayMethod" Association="Model.RentJournalPayMethod">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="PayMethod" EntitySet="PayMethods" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalWaterCraft" Association="Model.RentJournalWaterCraft">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="WaterCraft" EntitySet="WaterCrafts" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalInstructionType" Association="Model.RentJournalInstructionType">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="InstructionType" EntitySet="InstructionTypes" />
+    </AssociationSet>
+    <AssociationSet Name="RentJournalInstructor" Association="Model.RentJournalInstructor">
+      <End Role="RentJournal" EntitySet="RentJournalSet" />
+      <End Role="Instructor" EntitySet="Instructors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO" Type="String" Nullable="false" MaxLength="250" />
+    <Property Name="Passport" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <NavigationProperty Name="RentJournal" Relationship="Model.RentJournalClient" FromRole="Client" ToRole="RentJournal" cg:GetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="Water">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="RentJournal" Relationship="Model.RentJournalWater" FromRole="Water" ToRole="RentJournal" cg:GetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="PayMethod">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="RentJournal" Relationship="Model.RentJournalPayMethod" FromRole="PayMethod" ToRole="RentJournal" cg:GetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="InstructorPosition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="Instructor" Relationship="Model.InstructorInstructorPosition" FromRole="InstructorPosition" ToRole="Instructor" cg:GetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="Instructor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="InstructorPosition" Relationship="Model.InstructorInstructorPosition" FromRole="Instructor" ToRole="InstructorPosition" cg:GetterAccess="Protected" />
+    <Property Name="InstructorPositionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RentJournal" Relationship="Model.RentJournalInstructor" FromRole="Instructor" ToRole="RentJournal" cg:GetterAccess="Protected" />
+  </EntityType>
+  <Association Name="InstructorInstructorPosition">
+    <End Type="Model.Instructor" Role="Instructor" Multiplicity="*" />
+    <End Type="Model.InstructorPosition" Role="InstructorPosition" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="InstructorPosition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Instructor">
+        <PropertyRef Name="InstructorPositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InstructionType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="RentJournal" Relationship="Model.RentJournalInstructionType" FromRole="InstructionType" ToRole="RentJournal" cg:GetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="WatercraftType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="WaterCraft" Relationship="Model.WaterCraftWatercraftType" FromRole="WatercraftType" ToRole="WaterCraft" cg:GetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="WatercraftCondition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Condition" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="WaterCraft" Relationship="Model.WaterCraftWatercraftCondition" FromRole="WatercraftCondition" ToRole="WaterCraft" cg:GetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="WaterCraft">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="WatercraftType" Relationship="Model.WaterCraftWatercraftType" FromRole="WaterCraft" ToRole="WatercraftType" />
+    <Property Name="WatercraftTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WatercraftCondition" Relationship="Model.WaterCraftWatercraftCondition" FromRole="WaterCraft" ToRole="WatercraftCondition" />
+    <Property Name="WatercraftConditionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RentJournal" Relationship="Model.RentJournalWaterCraft" FromRole="WaterCraft" ToRole="RentJournal" cg:GetterAccess="Protected" />
+    <Property Name="CostRate" Type="Decimal" Nullable="false" Scale="2" Precision="9" />
+  </EntityType>
+  <Association Name="WaterCraftWatercraftType">
+    <End Type="Model.WaterCraft" Role="WaterCraft" Multiplicity="*" />
+    <End Type="Model.WatercraftType" Role="WatercraftType" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WatercraftType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WaterCraft">
+        <PropertyRef Name="WatercraftTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WaterCraftWatercraftCondition">
+    <End Type="Model.WaterCraft" Role="WaterCraft" Multiplicity="*" />
+    <End Type="Model.WatercraftCondition" Role="WatercraftCondition" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WatercraftCondition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WaterCraft">
+        <PropertyRef Name="WatercraftConditionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RentJournal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Client" Relationship="Model.RentJournalClient" FromRole="RentJournal" ToRole="Client" cg:GetterAccess="Protected" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Water" Relationship="Model.RentJournalWater" FromRole="RentJournal" ToRole="Water" cg:GetterAccess="Protected" />
+    <Property Name="WaterId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PayMethod" Relationship="Model.RentJournalPayMethod" FromRole="RentJournal" ToRole="PayMethod" cg:GetterAccess="Protected" />
+    <Property Name="PayMethodId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WaterCraft" Relationship="Model.RentJournalWaterCraft" FromRole="RentJournal" ToRole="WaterCraft" cg:GetterAccess="Protected" />
+    <Property Name="WaterCraftId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InstructionType" Relationship="Model.RentJournalInstructionType" FromRole="RentJournal" ToRole="InstructionType" cg:GetterAccess="Protected" />
+    <Property Name="InstructionTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Instructor" Relationship="Model.RentJournalInstructor" FromRole="RentJournal" ToRole="Instructor" cg:GetterAccess="Protected" />
+    <Property Name="InstructorId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" />
+    <Property Name="Cost" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+  </EntityType>
+  <Association Name="RentJournalClient">
+    <End Type="Model.RentJournal" Role="RentJournal" Multiplicity="*" />
+    <End Type="Model.Client" Role="Client" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalWater">
+    <End Type="Model.RentJournal" Role="RentJournal" Multiplicity="*" />
+    <End Type="Model.Water" Role="Water" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Water">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="WaterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalPayMethod">
+    <End Type="Model.RentJournal" Role="RentJournal" Multiplicity="*" />
+    <End Type="Model.PayMethod" Role="PayMethod" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PayMethod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="PayMethodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalWaterCraft">
+    <End Type="Model.RentJournal" Role="RentJournal" Multiplicity="*" />
+    <End Type="Model.WaterCraft" Role="WaterCraft" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WaterCraft">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="WaterCraftId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalInstructionType">
+    <End Type="Model.RentJournal" Role="RentJournal" Multiplicity="*" />
+    <End Type="Model.InstructionType" Role="InstructionType" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="InstructionType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="InstructionTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RentJournalInstructor">
+    <End Type="Model.RentJournal" Role="RentJournal" Multiplicity="*" />
+    <End Type="Model.Instructor" Role="Instructor" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Instructor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentJournal">
+        <PropertyRef Name="InstructorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
